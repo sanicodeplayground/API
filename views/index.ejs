@@ -3,7 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API</title>
+    <title>Weather App</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Weather Forecast</h1>
+
+    <form action="/getWeather" method="POST">
+      <input type="text" name="latitude" placeholder="Enter latitude" required />
+      <input type="text" name="longitude" placeholder="Enter longitude" required />
+      <button type="submit">Get Weather</button>
+    </form>
+    <h2>Hourly Weather Forecast</h2>
+    <% if (weatherData && weatherData.hourly) { %> <% weatherData.hourly.time.forEach((time, index)
+    => { %>
+    <div>
+      <p>Time : <%= time %></p>
+      <p>Temperature: <%=weatherData.hourly.temperature_2m[index] %> °C</p>
+      <p>Wind Speed: <%= weatherData.hourly.windspeed_10m[index] %> km/h</p>
+    </div>
+
+    <% }); %> <% } else { %>
+    <p>Enter latitude and longitude to get the weather</p>
+
+    <% } %>
+  </body>
 </html>
